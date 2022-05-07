@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class PilhaEstatica {
     private Contato dados[];
     private int topo;
+    public Object clone;
 
     public PilhaEstatica(int tamanho) {
         dados = new Contato[tamanho];
@@ -49,6 +50,12 @@ public class PilhaEstatica {
         while (pilha.vazia()) {
             System.out.print(pilha.pop());
         }
+    }
+
+    private void push(int dados2) {
+    }
+
+    public static void add(Object contato) {
     }
 
 }
