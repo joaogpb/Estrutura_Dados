@@ -1,5 +1,5 @@
 public class PilhaVaziaException extends Exception {
     public PilhaVaziaException() {
-        super("vazia");
+        super("A agenda está vazia!!");
     }
 }

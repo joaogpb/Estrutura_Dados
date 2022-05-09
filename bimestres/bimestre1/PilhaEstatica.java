@@ -1,61 +1,37 @@
-import java.util.Scanner;
-
-
-public class PilhaEstatica {
-    private Contato dados[];
+public class PilhaEstatica{
+    private Contato vetor[];
     private int topo;
-    public Object clone;
 
-    public PilhaEstatica(int tamanho) {
-        dados = new Contato[tamanho];
+
+    public PilhaEstatica(int tamanho){
+        vetor = new Contato[tamanho];
+
         topo = 0;
     }
-
-    public boolean vazia() {
+    public boolean vazia(){
         return topo == 0;
     }
-
-    public boolean cheia() {
-        return dados.length == topo;
+    public boolean cheia(){
+        return vetor.length == topo;
     }
 
-    public void push(Contato valor) throws PilhaCheiaException {
-        if (cheia()) {
+    public void push(Contato id)throws PilhaCheiaException{
+        if (cheia()){
             throw new PilhaCheiaException();
+        } 
+
+        vetor[topo]=id;
+        topo+=1;
         }
-        dados[topo++] = valor;
 
-    }
-
-    public Object pop() throws PilhaVaziaException {
-        if (vazia()) {
+    public Contato pop()throws PilhaVaziaException{
+        if(vazia()){
             throw new PilhaVaziaException();
         }
-
-        Object valor = dados[topo--];
-        dados[topo] = null;
-        return valor;
+        topo-=1;
+        Contato id = vetor[topo];
+        
+        vetor[topo] = null;
+        return id;
     }
-
-    public static void main(String[] args) throws PilhaVaziaException, PilhaCheiaException {
-        PilhaEstatica pilha = new PilhaEstatica(10);
-
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (!pilha.cheia()) {
-                System.out.print("Informe um valor numerico: ");
-                int dados = scanner.nextInt();
-                pilha.push(dados);
-            }
-        }
-        while (pilha.vazia()) {
-            System.out.print(pilha.pop());
-        }
-    }
-
-    private void push(int dados2) {
-    }
-
-    public static void add(Object contato) {
-    }
-
 }
