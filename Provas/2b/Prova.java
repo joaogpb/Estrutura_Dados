@@ -1,22 +1,30 @@
 package prova1;
 
-
+import java.util.Vector;
+import java.security.Principal;
 import java.util.List;
+import java.util.Scanner;
 
-public class Leitor {
-    public Prova contador;
-    private Object vetor;
+public class Prova {
 
-    public void push(){
-        vetor = contador;
+    public long contador;
 
+    private boolean verdadeido;
 
-        while(contador != 0){
-            vetor += contador;
-        }
+    public Prova(long contador, boolean verdadeido) {
+        this.contador = contador;
+        this.verdadeido = verdadeido;
     };
-
-    public static void main(String[] args) {
+    while( verdadeido = false){
+        java.out.println();
         
+        if(){
+        java.out.println("Qual numero desejado? " );
+        }else{
+            verdadeido = false;
+        }
+
     }
+
+    
 };
