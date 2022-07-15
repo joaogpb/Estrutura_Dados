@@ -17,7 +17,7 @@ public class Classificacao {
                 }
             }
         }
-        System.out.print(alek + ", ");
+        System.out.print(alek + ",");
         return v;
     }
 
@@ -182,7 +182,7 @@ public class Classificacao {
             heapify(v, i, 0);
         }
 
-        System.out.println(gibby + ",");
+        System.out.print(gibby + ",");
         return v;
     }
 
@@ -266,50 +266,31 @@ public class Classificacao {
     }
 
     public static void print(int v[]) {
-        // System.out.print("[ ");
-        
-        // for (int i : v) {
-        //    System.out.print(i + ", ");
-        // }
-
-        // System.out.println("]");
     }
 
     public static void main(String[] args) {
 
-       
+
         for (int i = 0 ; i < 1001; i++) {
 
 
             int avg[] = averagecase(i);
-            print(avg);
             print(bubblesort1(avg));
 
-            // int worst[] = worstcase(i);
-            // print(worst);
-            // print(bubblesort1(worst));
+            int worst[] = worstcase(i);
+            print(bubblesort1(worst));
 
-            // int azul[] = averagecase(i);
-            // print(azul);
-            // print(insertionsort(azul));
+            int azul[] = averagecase(i);
+            print(insertionsort(azul));
 
-            // int tin[] = worstcase(i);
-            // print(tin);
-            // print(insertionsort(tin));
+            int tin[] = worstcase(i);
+            print(insertionsort(tin));
 
-            // int poko[] = averagecase(i);
-            // print(poko);
-            // print(heapsort(poko));
+            int poko[] = averagecase(i);
+            print(heapsort(poko));
 
-            // int joao[] = worstcase(i);
-            // print(joao);
-            // print(heapsort(joao));
-    
-           
+            int joao[] = worstcase(i);
+            print(heapsort(joao)); 
         }
-        
-
-
     }
 }
-
