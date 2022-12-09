@@ -1,72 +1,81 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+importar java.util.ArrayList;
+importar java.util.Collections;
+importar java.util.HashMap;
+importar java.util.List;
+importar java.util.Map;
+importar java.util.Stack;
 
-public class MatrizAdjacencia {
-    private int[][] grafo;
-    private Map<String, Integer> vertices;
+public class MatrizAdjacência {
+    gráfico int[][] privado;
+    private Map<String, Integer> vértices;
 
     public MatrizAdjacencia(int[][] grafo, String vertices[]) {
-        this.grafo = grafo;
+        este.grafo = grafo;
         this.vertices = new HashMap<>();
 
-        for (int i = 0; i < vertices.length; i++) {
+        for (int i = 0; i < vértices.comprimento; i++) {
             this.vertices.put(vertices[i], i);
         }
     }
 
+
+    
     public String obtemVerticeMaiorGrau() {
-        String vertice = null;
+        Vértice da string = nulo;
         int maior = 0;
 
         for (String rotulo : vertices.keySet()) {
             int grau = obtemGrau(rotulo);
 
             if (grau > maior) {
-                vertice = rotulo;
+                vértice = rotulo;
                 maior = grau;
             }
         }
 
-        return vertice;
+        vértice de retorno;
     }
 
     public String obtemVerticeMenorGrau() {
-        String Menorvertice = null;
-        int menor = 1;
+        String Menor vértice = null;
+
+        int grauInicial = 0;
+        int cont = 1;
 
         for (String rotulo : vertices.keySet()) {
-            int graus = obtemMenorGraus(rotulo);
 
-            if (graus < menor) {
-                Menorvertice = rotulo;
-                menor = graus;
+            int grau = obtemGrau(rotulo);
+
+            if (cont == 1) {
+                grauInicial = obtemGrau(rotulo);
             }
-        }
 
-        return Menorvertice;
+            if (grau < grauInicial) {
+                Menor vértice = rotulo;
+            }
+            cont++;
+        }
+        retornar Menorvértice;
+
     }
 
     public List<String> obtemVizinhos(String vi) {
-        int i = vertices.get(vi);
+        int i = vértices.get(vi);
         List<String> vizinhos = new ArrayList<>();
 
         for (String vj : vertices.keySet()) {
-            int j = vertices.get(vj);
+            int j = vértices.get(vj);
 
             if (grafo[i][j] > 0) {
                 vizinhos.add(vj);
             }
         }
 
-        return vizinhos;
+        voltar vizinhos;
     }
 
     public void buscaEmProfundidadeRecursiva() {
-        String vertice = vertices.keySet().iterator().next();
+        String vértice = vértices.keySet().iterator().next();
         List<String> visitados = new ArrayList<>();
 
         System.out.print("Busca em profundidade recursiva: [ ");
@@ -78,7 +87,7 @@ public class MatrizAdjacencia {
 
     public void buscaEmProfundidade(String vertice, List<String> visitados) {
         if (!visitados.contains(vertice)) {
-            System.out.print(vertice + " ");
+            System.out.print(vértice + " ");
             visitados.add(vertice);
 
             List<String> vizinhos = obtemVizinhos(vertice);
@@ -90,7 +99,7 @@ public class MatrizAdjacencia {
     }
 
     public void buscaEmProfundidadeIterativa() {
-        String vertice = vertices.keySet().iterator().next();
+        String vértice = vértices.keySet().iterator().next();
         Stack<String> naoVisitados = new Stack<>();
         List<String> visitados = new ArrayList<>();
 
@@ -115,8 +124,8 @@ public class MatrizAdjacencia {
         System.out.println("]");
     }
 
-    public int obtemGrau(String vertice) {
-        int i = vertices.get(vertice);
+    public int obtemGrau(String vértice) {
+        int i = vértices.get(vértice);
         int grau = 0;
 
         for (int j = 0; j < grafo.length; j++) {
@@ -125,72 +134,65 @@ public class MatrizAdjacencia {
             }
         }
 
-        return grau;
+        retornar grau;
     }
 
-    public int obtemMenorGraus(String vertice) {
-        int i = vertices.get(vertice);
-        int graus = 0;
 
-        for (int j = 0; j < grafo.length; j++) {
-            if (grafo[i][j] < 0 || grafo[j][i] < 0) {
-                graus++;
-            }
-        }
 
-        return graus;
-    }
 
     public static void main(String args[]) {
-        int grafo[][] = {
-                { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-                { 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
-                { 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1 },
-                { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
-                { 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
-                { 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0 },
-                { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 },
-                { 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },
-                { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                { 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        gráfico int[][] = {
+                { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 , 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 , 0, 0 },
+                { 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 , 1, 1 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 1, 1 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 , 1, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 , 1, 1 },
+                { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 , 0, 1},
+                { 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 , 0, 1},
+                { 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 , 1, 0 },
+                { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0 , 0, 0 },
+                { 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 1, 0 },
+                { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 , 0, 0 },
+                { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 , 0, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 },
+                { 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 1},
+                { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0 }
         };
 
-        String vertices[] = { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
+        String vértices[] = { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
                 "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" };
 
-        MatrizAdjacencia matriz = new MatrizAdjacencia(grafo, vertices);
+        MatrizAdjacência matriz = new MatrizAdjacência(grafo, vértices);
 
-        String vertice = matriz.obtemVerticeMaiorGrau();
-        int grau = matriz.obtemGrau(vertice);
+        String verticeMaior = matriz.obtemVerticeMaiorGrau();
+        String verticeMenor = matriz.obtemVerticeMenorGrau();
 
-        String Menorvertice = matriz.obtemVerticeMenorGrau();
-        int graus = matriz.obtemMenorGraus(Menorvertice);
+        int graumaior = matriz.obtemGrau(verticeMaior);
+        System.out.println("Estado com maior número de estados vizinhos: " + verticeMaior);
+        System.out.println("visinhos do estado " + verticeMaior + " : " + graumaior);
 
-        System.out.println("Vértice com maior grau: " + vertice);
-        System.out.println("Grau do vértice " + vertice + " : " + grau);
-        System.out.println();
-        System.out.println("Vértice com menor grau: " + Menorvertice);
-        System.out.println("Grau do vértice " + Menorvertice + " : " + graus);
-        System.out.println();
-        matriz.buscaEmProfundidadeRecursiva();
+        System.out.println("");
+
+        int graumenor = matriz.obtemGrau(verticeMenor);
+        System.out.println("Estado com menor número de estados vizinhos: " + verticeMenor);
+        System.out.println("visinhos do estado " + verticeMenor + " : " + graumenor);
+
+        System.out.println("");
+
         matriz.buscaEmProfundidadeIterativa();
-
+        matriz.buscaEmProfundidadeRecursiva();
+       
     }
 }
